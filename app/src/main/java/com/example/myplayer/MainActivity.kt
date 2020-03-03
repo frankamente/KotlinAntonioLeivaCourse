@@ -2,6 +2,7 @@ package com.example.myplayer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.Button
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
@@ -9,13 +10,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        showToast("Hello")
-        changeTextView("Hello Fran")
-    }
-
-    private fun changeTextView(message: String) {
-        val textView = findViewById<TextView>(R.id.text_view)
-        textView.text = message
+        val button = findViewById<Button>(R.id.button)
+        val textInput = findViewById<TextView>(R.id.editText)
+        button.setOnClickListener{
+            showToast("Hello ${textInput.text}")
+        }
     }
 
     private fun showToast(text: String){
