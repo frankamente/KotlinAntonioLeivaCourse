@@ -7,8 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_media_item.view.*
 
-class MediaAdapter(private val items: List<MediaItem>) :
+class MediaAdapter(private val items: List<MediaItem>, val listener: (MediaItem) -> Unit) :
     RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.view_media_item)
@@ -16,7 +17,9 @@ class MediaAdapter(private val items: List<MediaItem>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(items[position])
+        val mediaItem = items[position]
+        holder.bind(mediaItem)
+        holder.itemView.setOnClickListener { listener(mediaItem) }
     }
 
     override fun getItemCount(): Int = items.size
