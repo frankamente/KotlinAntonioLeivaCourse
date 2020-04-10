@@ -2,14 +2,16 @@ package com.example.myplayer
 
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.view_media_item.view.*
+import kotlin.properties.Delegates
 
-class MediaAdapter(private val items: List<MediaItem>, val listener: (MediaItem) -> Unit) :
+class MediaAdapter(val listener: (MediaItem) -> Unit) :
     RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
 
+    var items: List<MediaItem> by Delegates.observable(emptyList()) { _, _, _ ->
+        notifyDataSetChanged()
+    }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = parent.inflate(R.layout.view_media_item)
