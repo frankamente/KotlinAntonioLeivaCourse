@@ -1,18 +1,15 @@
 package com.example.myplayer
 
-import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.squareup.picasso.Picasso
 
 class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<MediaAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.view_media_item, parent, false)
+        val view = parent.inflate(R.layout.view_media_item)
         return ViewHolder(view)
     }
 
@@ -24,12 +21,12 @@ class MediaAdapter(private val items: List<MediaItem>) : RecyclerView.Adapter<Me
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        private val title: TextView = view.findViewById(R.id.media_title)
-        private val thumbUrl: ImageView = view.findViewById(R.id.media_thumbUrl)
+        private val title = find<TextView>(R.id.media_title)
+        private val thumbUrl = find<ImageView>(R.id.media_thumbUrl)
 
         fun bind(item: MediaItem){
             title.text = item.title
-            Picasso.with(thumbUrl.context).load(item.thumbUrl).into(thumbUrl)
+            thumbUrl.loadUrl(item.thumbUrl)
             toast("Hola")
         }
     }
