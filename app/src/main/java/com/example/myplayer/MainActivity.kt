@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         recyclerView.adapter = mediaAdapter
-        mediaAdapter.items = getMedia()
+        mediaAdapter.items = MediaProvider.data
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -25,7 +25,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        mediaAdapter.items = getMedia().let { media ->
+        mediaAdapter.items = MediaProvider.data.let { media ->
             when (item.itemId) {
                 R.id.filter_photos -> media.filter { mediaItem -> mediaItem.type == MediaItem.Type.PHOTO }
                 R.id.filter_videos -> media.filter { mediaItem -> mediaItem.type == MediaItem.Type.VIDEO }
