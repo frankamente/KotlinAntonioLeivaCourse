@@ -25,19 +25,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
-            R.id.filter_photos -> {
-                mediaAdapter.items =
-                    getMedia().filter { mediaItem -> mediaItem.type == MediaItem.Type.PHOTO }
-            }
-            R.id.filter_videos -> {
-                mediaAdapter.items =
-                    getMedia().filter { mediaItem -> mediaItem.type == MediaItem.Type.VIDEO }
-            }
-            else -> {
-                mediaAdapter.items = getMedia()
+        mediaAdapter.items = getMedia().let { media ->
+            when (item.itemId) {
+                R.id.filter_photos -> media.filter { mediaItem -> mediaItem.type == MediaItem.Type.PHOTO }
+                R.id.filter_videos -> media.filter { mediaItem -> mediaItem.type == MediaItem.Type.VIDEO }
+                else -> media
+
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
 }
